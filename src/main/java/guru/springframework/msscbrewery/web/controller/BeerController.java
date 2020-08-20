@@ -3,6 +3,8 @@ package guru.springframework.msscbrewery.web.controller;
 
 import java.util.UUID;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -37,16 +39,18 @@ public class BeerController {
 	}
 	
 	@PostMapping
-	public ResponseEntity<String> handlePost(@RequestBody BeerDTO beerDTO) {
+	public ResponseEntity<String> handlePost(@Valid	@RequestBody BeerDTO beerDTO) {
 		BeerDTO savedDTO = beerService.saveNewBeer(beerDTO);
 		HttpHeaders headers = new HttpHeaders();
-		headers.add("Location", "/api/v1/beer/"+savedDTO.getId().toString());
+		headers.add("Location", "/api/v1/beer/" + savedDTO.getId().toString());
 		return new ResponseEntity<>(headers, HttpStatus.CREATED);
 	}
 	
 	@PutMapping("/{beerId}")
-	public ResponseEntity<String> handleUpdate(@PathVariable("beedId") UUID beerId , @RequestBody BeerDTO beerDTO){
+	public ResponseEntity<String> handleUpdate(@PathVariable("beerId") UUID beerId , @Valid @RequestBody BeerDTO beerDTO){
+		
 		beerService.updateBeer(beerId, beerDTO);
+		
 		return new ResponseEntity<String>(HttpStatus.NO_CONTENT);
 	}
 	
