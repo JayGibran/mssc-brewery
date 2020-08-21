@@ -25,6 +25,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 import guru.springframework.msscbrewery.service.BeerService;
 import guru.springframework.msscbrewery.web.model.BeerDTO;
+import guru.springframework.msscbrewery.web.model.BeerStyleEnum;
 
 @WebMvcTest(BeerController.class)
 public class BeerControllerTest {
@@ -44,7 +45,7 @@ public class BeerControllerTest {
     public void setUp() {
         validBeer = BeerDTO.builder().id(UUID.randomUUID())
                 .beerName("Beer1")
-                .beerStyle("PALE_ALE")
+                .beerStyle(BeerStyleEnum.PALE_ALE)
                 .upc(123456789012L)
                 .build();
     }

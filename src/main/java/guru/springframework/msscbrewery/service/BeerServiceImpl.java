@@ -5,6 +5,7 @@ import java.util.UUID;
 import org.springframework.stereotype.Service;
 
 import guru.springframework.msscbrewery.web.model.BeerDTO;
+import guru.springframework.msscbrewery.web.model.BeerStyleEnum;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
@@ -16,7 +17,7 @@ public class BeerServiceImpl implements BeerService {
 		return BeerDTO.builder()
 				.id(UUID.randomUUID())
 				.beerName("Galaxy Cat")
-				.beerStyle("Pale Ale").build();
+				.beerStyle(BeerStyleEnum.IPA).build();
 	}
 
 	@Override

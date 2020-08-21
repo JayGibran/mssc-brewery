@@ -3,6 +3,7 @@ package guru.springframework.msscbrewery.web.model;
 import java.util.UUID;
 
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Null;
 import javax.validation.constraints.Positive;
 
@@ -23,8 +24,8 @@ public class BeerDTO {
 	@NotBlank
 	private String beerName;
 	
-	@NotBlank
-	private String beerStyle;
+	@NotNull
+	private BeerStyleEnum beerStyle;
 	
 	@Positive
 	private Long upc;
