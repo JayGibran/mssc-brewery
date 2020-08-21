@@ -1,12 +1,19 @@
 package guru.springframework.msscbrewery.web.controller;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
+
+import javax.validation.ConstraintViolationException;
+import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -36,7 +43,7 @@ public class CustomerController {
 	}
 	
 	@PostMapping
-	public ResponseEntity<String> handlePost(@RequestBody CustomerDTO CustomerDTO) {
+	public ResponseEntity<String> handlePost(@Valid @RequestBody CustomerDTO CustomerDTO) {
 		CustomerDTO savedDTO = customerService.saveNewCustomer(CustomerDTO);
 		HttpHeaders headers = new HttpHeaders();
 		headers.add("Location", "/api/v1/customer/"+savedDTO.getId().toString());
@@ -45,7 +52,7 @@ public class CustomerController {
 	
 	@PutMapping("/{customerId}")
 	@ResponseStatus(HttpStatus.NO_CONTENT)
-	public void handleUpdate(@PathVariable("customerId") UUID customerId , @RequestBody CustomerDTO beerDTO){
+	public void handleUpdate(@PathVariable("customerId") UUID customerId , @Valid @RequestBody CustomerDTO beerDTO){
 		customerService.updateCustomer(customerId, beerDTO);
 	}
 	
